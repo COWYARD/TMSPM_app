@@ -16,12 +16,12 @@
         <div class="col-sm-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ $post->title }}</h3>
+                    <h3 class="panel-title">{{ $post->title }} <a href="{{ "/posts/{$post->id}/comments" }}" class="badge pull-right">{{ $post->comments()->count() }} comments</a></h3>
                 </div>
                 <div class="panel-body">
                     {{ $post->text }}
                 </div>
-                <div class="panel-footer">Created at {{ $post->created_at->toDateTimeString() }}</div>
+                <div class="panel-footer">Created at {{ $post->created_at->toDateTimeString() }} from {{ $post->user->name }}</div>
             </div>
         </div>
         @empty
