@@ -1,0 +1,18 @@
+version: '2'
+services:
+  app:
+    image: releases.docker.valueminer.eu/valueminer/laravel
+    ports:
+          - "80:80"
+    volumes:
+      - /e/git/uni/TMSPM_app:/var/www
+    links:
+      - db:db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=app
+      - POSTGRES_USER=app
+      - PGDATA=/var/lib/postgresql/data/pgdata
