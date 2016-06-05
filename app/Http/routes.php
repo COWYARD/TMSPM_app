@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('master');
+    return response()->redirectTo("/posts");
 });
 
 Route::resource('users', 'UserController');

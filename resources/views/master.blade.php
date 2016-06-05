@@ -28,12 +28,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Example App</a>
+                    <a class="navbar-brand" href="/">Example App</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Posts <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="/posts">Posts <span class="sr-only">(current)</span></a></li>
                         <li><a href="/users">Users</a></li>
                     </ul>
 
