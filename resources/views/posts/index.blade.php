@@ -16,7 +16,7 @@
         <div class="col-sm-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ $post->title }}</h3>
+                    <h3 class="panel-title">{{ $post->title }}<a href="{{ "/posts/{$post->id}/comments" }}" class="badge pull-right">Comments</a></h3>
                 </div>
                 <div class="panel-body">
                     {{ $post->text }}
