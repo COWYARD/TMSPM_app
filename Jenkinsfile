@@ -51,10 +51,7 @@ node{
     }
     deployments = null
 
-    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        for(environment in deployFirst)
-            deploy(environment)
-    }
+    deploy(deployFirst, env.versionNumber)
 }
 
 if(!deploySecond){
@@ -65,19 +62,23 @@ if(!deploySecond){
 try{
     input message: "Deploy to remaining?", ok: 'yes'
 } catch (all) {
-    echo "Stop deployment"
+    echo "Rollback deployment"
+    def previousVersion = env.versionNumber.toInteger() - 1
+    deploy(deployFirst, previousVersion)
     return
 }
 
 node{
     stage 'Second Deployment'
-    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        for(environment in deploySecond)
-            deploy(environment)
-    }
+    deploy(deploySecond, env.versionNumber)
+    echo "Finished"
 }
 
-def deploy(environment) {
-    sh "eb deploy $environment --version ${env.versionNumber.toString()}"
-    echo "Deployed version ${env.versionNumber.toString()} to $environment"
+def deploy(environmentList, version) {
+    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        for(environment in environmentList){
+            sh "eb deploy $environment --version $version"
+            echo "Deployed version $version to $environment"
+        }
+    }
 }
