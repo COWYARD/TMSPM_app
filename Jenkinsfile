@@ -63,8 +63,10 @@ try{
     input message: "Deploy to remaining?", ok: 'yes'
 } catch (all) {
     echo "Rollback deployment"
-    def previousVersion = env.versionNumber.toInteger() - 1
-    deploy(deployFirst, previousVersion)
+    node{
+        def previousVersion = env.versionNumber.toInteger() - 1
+        deploy(deployFirst, previousVersion)
+    }
     return
 }
 
