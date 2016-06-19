@@ -32,12 +32,15 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav navbar-left">
                         <li class="active"><a href="/posts">Posts <span class="sr-only">(current)</span></a></li>
                         <li><a href="/users">Users</a></li>
                     </ul>
-
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><span class="navbar-brand">{{ gethostname() }}</span></li>
+                    </ul>
                 </div>
+
             </div>
         </nav>
 
