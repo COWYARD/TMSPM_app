@@ -21,7 +21,7 @@
                 <div class="panel-body">
                     {{ $post->text }}
                 </div>
-                <div class="panel-footer">Created at {{ $post->created_at->toDateTimeString() }}</div>
+                <div class="panel-footer">Created at {{ $post->created_at->toDateTimeString() }}, from {{ $post->user->name }}</div>
             </div>
         </div>
         @empty
